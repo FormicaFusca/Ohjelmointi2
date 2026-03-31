@@ -1,14 +1,14 @@
 let nimi = prompt("Enter student's name:");
 
-let houseNumber = Math.floor(Math.random() * 4) + 1;
+let houseNumber = Math.floor(Math.random() * 4);
 
 let house;
 
-if (houseNumber === 1) {
+if (houseNumber === 0) {
     house = "Gryffindor";
-} else if (houseNumber === 2) {
+} else if (houseNumber === 1) {
     house = "Slytherin";
-} else if (houseNumber === 3) {
+} else if (houseNumber === 2) {
     house = "Hufflepuff";
 } else {
     house = "Ravenclaw";
