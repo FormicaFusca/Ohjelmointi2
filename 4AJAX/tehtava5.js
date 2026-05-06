@@ -1,0 +1,48 @@
+'use strict';
+
+const form = document.getElementById('form');
+const results = document.getElementById('results');
+
+form.addEventListener('submit', async function (evt) {
+    evt.preventDefault();
+
+    const query = document.getElementById('query').value;
+
+    try {
+        const response = await fetch(`https://api.tvmaze.com/search/shows?q=${query}`);
+        const jsonData = await response.json();
+
+        results.innerHTML = '';
+
+        jsonData.forEach(tvShow => {
+            const show = tvShow.show;
+
+            const article = document.createElement('article');
+
+            const title = document.createElement('h2');
+            title.textContent = show.name;
+
+            const link = document.createElement('a');
+            link.href = show.url;
+            link.target = '_blank';
+            link.textContent = 'View details';
+
+            const img = document.createElement('img');
+            img.src = show.image?.medium || '';
+            img.alt = show.name;
+
+            const summary = document.createElement('div');
+            summary.innerHTML = show.summary;
+
+            article.appendChild(title);
+            article.appendChild(img);
+            article.appendChild(link);
+            article.appendChild(summary);
+
+            results.appendChild(article);
+        });
+
+    } catch (error) {
+        console.log(error.message);
+    }
+});
